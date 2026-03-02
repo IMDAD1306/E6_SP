@@ -38,6 +38,9 @@ CREATE TABLE APPARTEMENT (
     id_proprio INT,
     FOREIGN KEY (id_proprio) REFERENCES PROPRIETAIRE(id_proprio)
 );
+ ALTER TABLE APPARTEMENT
+    -> ADD COLUMN prix_hebdo DECIMAL(10,2) DEFAULT 450.00;
+
 ALTER TABLE APPARTEMENT ADD COLUMN image VARCHAR(100) DEFAULT 'default.jpg';
 
 -- 4. Table CONTRAT (Mandat de gestion)

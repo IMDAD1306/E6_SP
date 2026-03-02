@@ -2,7 +2,6 @@
     session_start();
     
     // 1. CHARGEMENT DU CONTROLEUR
-    // Vérifie bien que le nom du fichier est "controleur.class.php" dans ton dossier
     require_once("Controleur/controleur.class.php"); 
     $unControleur = new Controleur(); 
 
@@ -16,24 +15,21 @@
         exit();
     }
 
-    // 4. SÉCURITÉ PROFIL
-    if ($page == 'profil' && !isset($_SESSION['email'])) {
+    // 4. SÉCURITÉ PROFIL ET PANIER
+    if (($page == 'profil' || $page == 'panier') && !isset($_SESSION['id_user'])) {
         header("Location: index.php?page=connexion");
         exit();
     }
 
     // --- TRAITEMENT DE LA CONNEXION ---
     if (isset($_POST['btnConnexion'])) {
-        // On utilise $unControleur ici aussi !
         $user = $unControleur->login($_POST['email'], $_POST['mdp']);
-        
         if ($user) {
             $_SESSION['id_user'] = $user['id_perso']; 
             $_SESSION['role']    = $user['role']; 
             $_SESSION['email']   = $user['email'];
             $_SESSION['nom']     = $user['nom'];
             $_SESSION['prenom']  = $user['prenom'];
-
             header("Location: index.php?page=accueil");
             exit();
         }
@@ -41,17 +37,41 @@
 
     // --- TRAITEMENT DE L'INSCRIPTION ---
     if (isset($_POST['btnInscription'])) {
-        // L'erreur disparaît car $unControleur est bien défini en haut
         $unControleur->inscrireUser(
-            $_POST['nom'], 
-            $_POST['prenom'], 
-            $_POST['email'], 
-            $_POST['tel'], 
-            $_POST['mdp'],
-            $_POST['role']
+            $_POST['nom'], $_POST['prenom'], $_POST['email'], 
+            $_POST['tel'], $_POST['mdp'], $_POST['role']
         );
         header("Location: index.php?page=connexion");
         exit();
+    }
+
+    // --- LOGIQUE DE SUPPRESSION DU PANIER (Indépendante) ---
+    if ($page == 'panier' && isset($_GET['action']) && $_GET['action'] == 'supprimer' && isset($_GET['id_reser'])) {
+        $unControleur->supprimerReservation($_GET['id_reser']);
+        $_SESSION['success'] = "La réservation a été retirée du panier.";
+        header("Location: index.php?page=panier");
+        exit();
+    }
+
+    // --- TRAITEMENT DE L'AJOUT AU PANIER ---
+    if (isset($_POST['btnReserver'])) {
+        if (isset($_SESSION['id_user'])) {
+            $resultat = $unControleur->ajouterAuPanier(
+                $_SESSION['id_user'], 
+                $_POST['id_appart'], 
+                $_POST['date_debut'], 
+                $_POST['date_fin']
+            );
+
+            if ($resultat == "ok") {
+                $_SESSION['success'] = "Réservation ajoutée !";
+                header("Location: index.php?page=panier");
+            } else {
+                $_SESSION['erreur_resa'] = $resultat;
+                header("Location: index.php?page=detail&id=" . $_POST['id_appart']);
+            }
+            exit();
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -59,8 +79,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Neige & Soleil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="Style/style_index.css">
     <link rel="stylesheet" href="Style/style_connexion.css"> 
+    <link rel="stylesheet" href="Style/style_appartement.css">
+    <link rel="stylesheet" href="Style/style_details.css"> 
+    <link rel="stylesheet" href="Style/style_panier.css"> 
 </head>
 <body>
 
@@ -80,7 +104,9 @@
     <main>
         <?php if (isset($_SESSION['success'])): ?>
             <div class="container" style="margin-top:20px;">
-                <p class="msg-success"><?= $_SESSION['success']; unset($_SESSION['success']); ?></p>
+                <p class="msg-success" style="background:#d4edda; color:#155724; padding:15px; border-radius:5px;">
+                    <?= $_SESSION['success']; unset($_SESSION['success']); ?>
+                </p>
             </div>
         <?php endif; ?>
 
@@ -88,35 +114,32 @@
             <section class="intro">
                 <h1>Nos Locations de Vacances</h1>
             </section>
-
-            <div class="container chalet-list">
-                <article class="card">
-                    <img src="images/chalets/chalet_marmoton.jpg" alt="Chalet Neige">
-                    <div class="card-body">
-                        <h3>Chalet "Le Marmoton"</h3>
-                        <p style="color:#888;">📍 Molines-en-Queyras</p>
-                        <a href="index.php?page=detail&id=1" class="btn-blue">Voir les détails</a>
-                    </div>
-                </article>
-            </div>
-
         <?php else: ?>
             <?php 
-            // TOUS LES APPELS PASSENT MAINTENANT PAR LE CONTROLEUR
-            if ($page == 'detail' && isset($_GET['id'])) {
-                $unAppart = $unControleur->getAppartement($_GET['id']);
-            }
+            switch($page) {
+                case 'detail':
+                    if (isset($_GET['id'])) {
+                        $unAppart = $unControleur->getAppartement($_GET['id']);
+                    } else {
+                        header("Location: index.php?page=appartements");
+                    }
+                    break;
+                
+                case 'appartements':
+                    $appartements = $unControleur->afficherCatalogue();
+                    break;
 
-            if ($page == 'materiel') {
-                $lesMateriels = $unControleur->getMateriels();
-            }
+                case 'panier':
+                    $lesReservations = $unControleur->getPanierByClient($_SESSION['id_user']);
+                    break;
 
-            if ($page == 'profil') {
-                $infosUser = $unControleur->getUserDetails($_SESSION['email']);
-            }
+                case 'profil':
+                    $infosUser = $unControleur->getUserDetails($_SESSION['email']);
+                    break;
 
-            if ($page == 'appartements') {
-                $lesApparts = $unControleur->getAppartementsFiltres("", ""); 
+                case 'materiel':
+                    $lesMateriels = $unControleur->getMateriels();
+                    break;
             }
 
             $file = "Vue/vue_" . $page . ".php";

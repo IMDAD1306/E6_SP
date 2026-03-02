@@ -1,12 +1,6 @@
-<?php
-    $appartements = $unControleur->afficherCatalogue();
-?>
-
 <link rel="stylesheet" href="Style/style_appartement.css">
 
 <div class="container">
-    <h1 style="text-align: center; margin: 20px 0;">Nos Locations</h1>
-
     <div class="apparts-grid">
         
         <?php foreach ($appartements as $unAppart) : ?>
@@ -14,24 +8,42 @@
             <article class="appart-card">
                 
                 <div class="appart-image">
-                    <span class="price"><?php echo $unAppart['type_appart']; ?></span>
+                    <span class="price">
+                        <strong><?= number_format($unAppart['prix_hebdo'] / 7, 1, ',', ' '); ?> €</strong> / nuit
+                    </span>
                     
-                    <img src="images/chalets/<?php echo $unAppart['image']; ?>" 
-                         alt="Appartement" 
+                    <img src="images/chalets/<?= htmlspecialchars($unAppart['image']); ?>" 
+                         alt="Appartement <?= htmlspecialchars($unAppart['num_appart']); ?>" 
                          onerror="this.src='images/background-montagne.jpg';">
                 </div>
 
                 <div class="appart-details">
-                    <h3><?php echo $unAppart['type_appart']; ?> - <?php echo $unAppart['num_appart']; ?></h3>
-                    <p class="location">📍 Station Neige & Soleil</p>
+                    <h3>
+                        <?= htmlspecialchars($unAppart['type_appart']); ?> - 
+                        <?= htmlspecialchars($unAppart['num_appart']); ?>
+                    </h3>
+
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> Station Neige & Soleil</p>
                     
                     <div class="specs">
-                        <span><i class="fas fa-expand"></i> <?php echo $unAppart['surface']; ?> m²</span>
-                        <span><i class="fas fa-users"></i> <?php echo $unAppart['capacite_accueil']; ?> pers.</span>
+                        <span>
+                            <i class="fas fa-expand"></i> 
+                            <?= $unAppart['surface']; ?> m²
+                        </span>
+
+                        <span>
+                            <i class="fas fa-users"></i> 
+                            <?= $unAppart['capacite_accueil']; ?> pers.
+                        </span>
                     </div>
                     
-                    <a href="index.php?page=vue_detail&id=<?php echo $unAppart['id_appart']; ?>" class="btn-view">
-                        Voir les détails
+                    <div class="price-info-low" style="font-size: 0.8rem; color: #777; margin-bottom: 10px;">
+                        Soit <?= number_format($unAppart['prix_hebdo'], 0, ',', ' '); ?> € la semaine
+                    </div>
+
+                    <a href="index.php?page=detail&id=<?= $unAppart['id_appart']; ?>" 
+                       class="btn-view">
+                        <i class="fas fa-search-plus"></i> Voir les détails
                     </a>
                 </div>
                 
@@ -39,4 +51,5 @@
 
         <?php endforeach; ?>
 
-    </div> </div>
+    </div>
+</div>
