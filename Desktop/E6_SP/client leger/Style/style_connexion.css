@@ -1,0 +1,88 @@
+/* Centrage complet de la page */
+.connexion-page {
+    max-width: 400px;
+    margin: 100px auto; /* Centre verticalement et horizontalement */
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+}
+
+.connexion-page h1 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+/* Style du formulaire */
+.connexion-page form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.connexion-page label {
+    margin-bottom: 5px;
+    color: #7f8c8d;
+    font-weight: bold;
+}
+
+.connexion-page input {
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.connexion-page input:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Bouton */
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+/* Messages d'erreur */
+.msg {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    border: 1px solid #f5c6cb;
+}
+
+/* Lien inscription */
+.connexion-page p {
+    margin-top: 20px;
+    color: #7f8c8d;
+}
+
+.connexion-page a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.connexion-page a:hover {
+    text-decoration: underline;
+}
+

@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;600&display=swap');
+
+.facture-wrapper {
+    max-width: 860px;
+    margin: 40px auto 80px;
+    padding: 0 24px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* BOUTONS HAUT */
+.facture-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #1e4d7b;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 9px 18px;
+    border-radius: 8px;
+    background: #f0f5fb;
+    border: 1.5px solid #d0dde8;
+    transition: all 0.25s;
+}
+
+.btn-back:hover { background: #1e4d7b; color: white; border-color: #1e4d7b; }
+
+.btn-print {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #c9a84c;
+    color: #0d1b2a;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.25s;
+}
+
+.btn-print:hover { background: #f0d080; }
+
+/* DOCUMENT */
+.facture-document {
+    background: white;
+    border-radius: 16px;
+    padding: 50px 55px;
+    box-shadow: 0 8px 40px rgba(13,27,42,0.10);
+    border: 1px solid #eef1f5;
+    border-top: 5px solid #c9a84c;
+}
+
+/* HEADER */
+.facture-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.facture-logo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: #0d1b2a;
+    margin-bottom: 6px;
+}
+
+.facture-logo p {
+    font-size: 0.85rem;
+    color: #8a9bb0;
+    line-height: 1.7;
+}
+
+.facture-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1e4d7b;
+    text-align: right;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+}
+
+.meta-table td {
+    padding: 4px 12px 4px 0;
+    font-size: 0.88rem;
+    color: #6b7a8d;
+    vertical-align: top;
+}
+
+.meta-table td:first-child { color: #8a9bb0; white-space: nowrap; }
+.meta-table td:last-child { text-align: right; color: #1a2633; }
+
+/* DIVIDER */
+.facture-divider {
+    border: none;
+    border-top: 1.5px solid #eef1f5;
+    margin: 25px 0;
+}
+
+/* PARTIES */
+.facture-parties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 10px;
+}
+
+.partie h4 {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8a9bb0;
+    margin-bottom: 10px;
+}
+
+.partie p {
+    font-size: 0.9rem;
+    color: #1a2633;
+    line-height: 1.7;
+}
+
+/* SECTION LABEL */
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8a9bb0;
+    margin-bottom: 14px;
+}
+
+/* TABLE PRESTATIONS */
+.facture-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+.facture-table th {
+    background: #f5f8fb;
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #6b7a8d;
+    border-bottom: 2px solid #eef1f5;
+}
+
+.facture-table th:last-child,
+.facture-table td:last-child { text-align: right; }
+
+.facture-table td {
+    padding: 16px 14px;
+    font-size: 0.9rem;
+    color: #1a2633;
+    border-bottom: 1px solid #eef1f5;
+    vertical-align: top;
+}
+
+/* TOTAUX */
+.facture-totaux {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.totaux-table {
+    border-collapse: collapse;
+    min-width: 280px;
+}
+
+.totaux-table td {
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    color: #6b7a8d;
+}
+
+.totaux-table td:last-child { text-align: right; color: #1a2633; }
+
+.totaux-table tr.total-ttc td {
+    border-top: 2px solid #eef1f5;
+    padding-top: 14px;
+    font-size: 1.05rem;
+    color: #0d1b2a;
+}
+
+/* FOOTER */
+.facture-footer {
+    text-align: center;
+    padding-top: 25px;
+    border-top: 1.5px solid #eef1f5;
+    color: #8a9bb0;
+    font-size: 0.85rem;
+    line-height: 1.6;
+}
+
+/* IMPRESSION */
+@media print {
+    .facture-actions { display: none !important; }
+    .facture-wrapper { margin: 0; padding: 0; }
+    .facture-document {
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 30px 40px;
+    }
+    header, .hero-container, footer { display: none !important; }
+}

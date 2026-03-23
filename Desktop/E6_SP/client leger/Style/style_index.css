@@ -1,0 +1,300 @@
+
+        /* --- STYLE GLOBAL --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #ffffff;
+        }
+
+        /* --- 1. BARRE DE NAVIGATION (TOUT EN HAUT) --- */
+        header {
+            background-color: #1a3a5a; /* Bleu marine foncé */
+            padding: 0 50px;
+            height: 65px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: #f1c40f; /* Couleur jaune/or */
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #f1c40f;
+        }
+
+        /* --- 2. IMAGE HERO AVEC LIEN (SOUS LE MENU) --- */
+        .hero-container {
+            width: 100%;
+            height: 350px; /* Ajuste la hauteur selon tes envies */
+            overflow: hidden;
+            object-position: center 110%;
+        }
+
+        .hero-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* L'image remplit l'espace sans se déformer */
+            display: block;
+        }
+
+        /* --- 3. CONTENU ACCUEIL --- */
+        .intro {
+            text-align: center;
+            padding: 60px 20px 30px;
+        }
+
+        .intro h1 {
+            color: #1a3a5a;
+            font-size: 2.8rem;
+            margin: 0;
+        }
+
+        /* BANDEAU BLEU CLAIR RECHERCHE */
+        .search-area {
+            background-color: #d9edf7;
+            padding: 35px 0;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+
+        .search-box {
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 10px 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            padding: 0 25px;
+        }
+
+        .input-group:not(:last-of-type) {
+            border-right: 1px solid #eee;
+        }
+
+        .input-group label {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .btn-yellow {
+            background-color: #f1c40f;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+
+        /* GRILLE CARTES */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto 80px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px; /* Coins très arrondis comme sur l'image */
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .card-body h3 {
+            margin: 0 0 10px;
+            color: #1a3a5a;
+        }
+
+        .btn-blue {
+            display: inline-block;
+            background-color: #2980b9;
+            color: white;
+            padding: 12px 35px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Message de succès (Vert) */
+.msg-success {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #c3e6cb;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Message d'erreur (Rouge) */
+.msg-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #f5c6cb;
+    margin-bottom: 20px;
+    text-align: center;
+}
+/* Container principal */
+.profil-container {
+    padding: 40px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Carte Header */
+.profil-header-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    margin-bottom: 40px;
+}
+
+.user-info { display: flex; align-items: center; gap: 20px; }
+
+.user-avatar {
+    width: 70px;
+    height: 70px;
+    background: #3498db;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.user-badge {
+    background: #e1f5fe;
+    color: #0288d1;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.user-stats { display: flex; gap: 30px; border-left: 1px solid #eee; padding-left: 30px; }
+.stat-item { text-align: center; }
+.stat-value { display: block; font-size: 1.5rem; font-weight: bold; color: #2c3e50; }
+.stat-label { font-size: 0.8rem; color: #7f8c8d; }
+
+/* Tableau */
+.historique-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.profil-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.profil-table th {
+    text-align: left;
+    padding: 15px;
+    color: #95a5a6;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 2px solid #f8f9fa;
+}
+
+.profil-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f8f9fa;
+    color: #2c3e50;
+}
+
+/* Statuts et Pills */
+.status-done { color: #27ae60; background: #eafaf1; padding: 5px 12px; border-radius: 15px; font-size: 0.85rem; }
+.status-pending { color: #f39c12; background: #fef9e7; padding: 5px 12px; border-radius: 15px; font-size: 0.85rem; }
+
+.pill {
+    padding: 6px 15px;
+    background: #f8f9fa;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-left: 5px;
+}
+.pill.active { background: #3498db; color: white; }
